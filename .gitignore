@@ -1,0 +1,11 @@
+# Django #
+
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+portal/migrations/
+static/
+# portal/templates
+media/
