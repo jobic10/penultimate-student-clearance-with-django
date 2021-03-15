@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -128,3 +128,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+MEDIA_ROOT = 'media'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTH_USER_MODEL = 'clearance.CustomUser'
+AUTHENTICATION_BACKENDS = ['clearance.email_backend.EmailBackend']
+
+
+SMS_TOKEN = os.environ.get('SMS_TOKEN')
+
+SMS_SENDER = 'UNILORIN'
+SMS_BASE_URL = 'https://smartsmssolutions.com/api/json.php?'
+DEVELOPER = "Owonubi Job Sunday - 17/52HA127"
+SUPERVISOR = "Mr. H. A. Mojeed"
+APP_NAME = "E-SIWES"
