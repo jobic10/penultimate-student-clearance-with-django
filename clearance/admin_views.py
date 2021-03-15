@@ -47,28 +47,12 @@ def add_student(request):
             admin = admin.save(commit=False)
             admin.user_type = 3  # 3 Stands for Student
 
-            # Send mail
-            data = {'msg': "Welcome, Please use this password to login your account <b>" +
-                    str(request.POST.get('password'))+"</b> ", 'SITENAME': settings.APP_NAME}
-            msg_html = render_to_string(
-                'email/email.html', data)
-            msg_plain = render_to_string(
-                'email/email.txt', data)
             admin.save()
             student.admin = admin
             student.save()
             messages.success(request, "Successfully Added")
             context['form'] = StudentForm()
-            try:
-                send_mail(
-                    'Account Creation',
-                    msg_plain,
-                    settings.EMAIL_HOST_USER,
-                    [request.POST.get('email')],
-                    html_message=msg_html,
-                )
-            except:
-                pass
+
         else:
             messages.error(request, "Invalid Data Provided ")
     return render(request, 'admin_template/add_student_template.html', context)
