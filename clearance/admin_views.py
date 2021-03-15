@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, reverse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Officer, Student, Logbook, FinalRemark, CustomUser
+from .models import *
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash

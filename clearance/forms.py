@@ -49,25 +49,6 @@ class CustomUserForm(FormSettings):
                         "The given email is already registered")
         return formEmail
 
-    def clean_phone(self, *args, **kwargs):
-        formPhone = self.cleaned_data['phone'].lower()
-        if len(formPhone) > 11:
-            raise forms.ValidationError(
-                "The given phone number exceeds 11 characters")
-        if self.instance.pk is None:  # Insert
-            if CustomUser.objects.filter(phone=formPhone).exists():
-                raise forms.ValidationError(
-                    "The given phone number is already registered")
-        else:  # Update
-            dbPhone = self.Meta.model.objects.get(
-                id=self.instance.pk).phone.lower()
-            if dbPhone != formPhone:  # There has been changes
-                if CustomUser.objects.filter(phone=formPhone).exists():
-                    raise forms.ValidationError(
-                        "The given phone has already registered")
-
-        return formPhone
-
     def clean_password(self):
         password = self.cleaned_data.get("password", None)
         if self.instance.pk is not None:
@@ -87,19 +68,38 @@ class StudentForm(CustomUserForm):
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
 
+    def clean_phone(self, *args, **kwargs):
+        formPhone = self.cleaned_data['phone'].lower()
+        if len(formPhone) > 11:
+            raise forms.ValidationError(
+                "The given phone number exceeds 11 characters")
+        if self.instance.pk is None:  # Insert
+            if CustomUser.objects.filter(phone=formPhone).exists():
+                raise forms.ValidationError(
+                    "The given phone number is already registered")
+        else:  # Update
+            dbPhone = self.Meta.model.objects.get(
+                id=self.instance.pk).phone.lower()
+            if dbPhone != formPhone:  # There has been changes
+                if CustomUser.objects.filter(phone=formPhone).exists():
+                    raise forms.ValidationError(
+                        "The given phone has already registered")
+
+        return formPhone
+
     class Meta(CustomUserForm.Meta):
         model = Student
         fields = CustomUserForm.Meta.fields + \
-            ['fullname', 'regno', 'picture', 'company']
+            ['fullname', 'regno', 'picture', 'phone', 'department']
 
 
-class LogForm(forms.ModelForm):
+class DepartmentForm(FormSettings):
     def __init__(self, *args, **kwargs):
         super(LogForm, self).__init__(*args, **kwargs)
 
     class Meta:
-        model = Logbook
-        fields = ['report']
+        model = Department
+        fields = ['name']
 
 
 class StudentEditForm(FormSettings):
@@ -108,13 +108,4 @@ class StudentEditForm(FormSettings):
 
     class Meta:
         model = Student
-        fields = ['fullname', 'regno', 'picture', 'company']
-
-
-class CompanyForm(FormSettings):
-    def __init__(self, *args, **kwargs):
-        super(CompanyForm, self).__init__(*args, **kwargs)
-
-    class Meta:
-        model = Company
-        fields = ['name', 'address']
+        fields = ['fullname', 'regno', 'picture', 'phone']

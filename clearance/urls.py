@@ -1,5 +1,5 @@
 from django.urls import path
-from . import company_views, admin_views, student_views, views
+from . import officer_views, admin_views, student_views, views
 
 urlpatterns = [
     # * General
@@ -19,14 +19,14 @@ urlpatterns = [
     path("student/manage/", admin_views.manage_student, name='manage_student'),
     path("student/edit/<int:student_id>",
          admin_views.edit_student, name='edit_student'),
-    path("company/add", admin_views.add_company, name='add_company'),
-    path("company/manage/", admin_views.manage_company, name='manage_company'),
+    path("officer/add", admin_views.add_officer, name='add_officer'),
+    path("officer/manage/", admin_views.manage_officer, name='manage_officer'),
 
-    path("company/edit/<int:company_id>",
-         admin_views.edit_company, name='edit_company'),
+    path("officer/edit/<int:officer_id>",
+         admin_views.edit_officer, name='edit_officer'),
 
-    path("company/delete/<int:company_id>",
-         admin_views.delete_company, name='delete_company'),
+    path("officer/delete/<int:officer_id>",
+         admin_views.delete_officer, name='delete_officer'),
     path('logbook/view/all', admin_views.manage_logbook, name='manage_logbook'),
 
 
@@ -34,19 +34,19 @@ urlpatterns = [
 
 
 
-    # * Company
-    path("company/home/", company_views.company_home, name='company_home'),
-    path("company_view_profile", company_views.company_view_profile,
-         name='company_view_profile'),
-    path("company/logbook/<int:logbook_id>", company_views.view_logbook,
-         name='company_view_logbook'),
-    path("company/student/<int:student_id>/logbook", company_views.view_student_logbook,
+    # * Officer
+    path("officer/home/", officer_views.officer_home, name='officer_home'),
+    path("officer_view_profile", officer_views.officer_view_profile,
+         name='officer_view_profile'),
+    path("officer/logbook/<int:logbook_id>", officer_views.view_logbook,
+         name='officer_view_logbook'),
+    path("officer/student/<int:student_id>/logbook", officer_views.view_student_logbook,
          name='student_logbook'),
-    path("company/students/", company_views.view_students,
-         name='company_students'),
-    path("company/logbook/<int:logbook_id>/update/",
-         company_views.update_logbook, name='update_logbook'),
-    path('company/mass/remark', company_views.mass_remark, name='mass_remark'),
+    path("officer/students/", officer_views.view_students,
+         name='officer_students'),
+    path("officer/logbook/<int:logbook_id>/update/",
+         officer_views.update_logbook, name='update_logbook'),
+    path('officer/mass/remark', officer_views.mass_remark, name='mass_remark'),
 
 
 
@@ -55,10 +55,6 @@ urlpatterns = [
     path("student/home/", student_views.student_home, name='student_home'),
     path("student_view_profile", student_views.student_view_profile,
          name='student_view_profile'),
-    path("logbook/new", student_views.add_new_logbook, name="add_new_logbook"),
-    path("student/logbook/<int:logbook_id>", student_views.view_logbook,
-         name='view_this_logbook'),
-    path("student/logbook", student_views.view_my_logbook,
-         name='my_logbook'),
+
 
 ]
