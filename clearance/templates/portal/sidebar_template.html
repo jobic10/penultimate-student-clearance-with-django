@@ -81,11 +81,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    {% url 'add_company' as add_company%}
-                    <a href="{{add_company}}" class="nav-link  {% if add_company == request.path %} active {% endif %}">
+                    {% url 'add_officer' as add_officer%}
+                    <a href="{{add_officer}}" class="nav-link  {% if add_officer == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Add Company
+                            Add Officer
                             
                         </p>
                     </a>
@@ -94,14 +94,40 @@
                   
                   
                 <li class="nav-item">
-                    {% url 'manage_company' as manage_company %}
-                    {% url 'edit_company' company_id as edit_company %}
+                    {% url 'manage_officer' as manage_officer %}
+                    {% url 'edit_officer' company_id as edit_officer %}
 
-                    <a href="{{manage_company}}"
-                        class="nav-link  {% if edit_company == request.path or manage_company == request.path %} active {% endif %}">
+                    <a href="{{manage_officer}}"
+                        class="nav-link  {% if edit_officer == request.path or manage_officer == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Manage Companies 
+                            Manage Officers 
+
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    {% url 'add_department' as add_department%}
+                    <a href="{{add_department}}" class="nav-link  {% if add_department == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Add Department
+                            
+                        </p>
+                    </a>
+                </li>
+              
+                  
+                  
+                <li class="nav-item">
+                    {% url 'manage_department' as manage_department %}
+                    {% url 'edit_department' department_id as edit_department %}
+
+                    <a href="{{manage_department}}"
+                        class="nav-link  {% if edit_department == request.path or manage_department == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Manage Departments 
 
                         </p>
                     </a>

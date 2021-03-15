@@ -91,9 +91,15 @@ class StudentForm(CustomUserForm):
             ['fullname', 'regno', 'picture', 'phone', 'department']
 
 
+class OfficerForm(FormSettings):
+    class Meta:
+        model = Officer
+        fields = ['department']
+
+
 class DepartmentForm(FormSettings):
     def __init__(self, *args, **kwargs):
-        super(LogForm, self).__init__(*args, **kwargs)
+        super(DepartmentForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Department

@@ -25,6 +25,15 @@ urlpatterns = [
     path("officer/edit/<int:officer_id>",
          admin_views.edit_officer, name='edit_officer'),
 
+
+    path("department/add", admin_views.add_department, name='add_department'),
+    path("department/manage/", admin_views.manage_department,
+         name='manage_department'),
+
+    path("department/edit/<int:department_id>",
+         admin_views.edit_department, name='edit_department'),
+
+
     path("officer/delete/<int:officer_id>",
          admin_views.delete_officer, name='delete_officer'),
     path('logbook/view/all', admin_views.manage_logbook, name='manage_logbook'),

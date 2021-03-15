@@ -165,6 +165,15 @@ def manage_officer(request):
     return render(request, "admin_template/manage_officer.html", context)
 
 
+def manage_department(request):
+    depts = Department.objects.all()
+    context = {
+        'departments': depts,
+        'page_title': 'Manage Departments'
+    }
+    return render(request, "admin_template/manage_department.html", context)
+
+
 def manage_logbook(request):
     if request.method == 'POST':
         student_id = request.POST.get('student_id', 0)
@@ -184,6 +193,38 @@ def manage_logbook(request):
     return render(request, "admin_template/manage_logbook.html", context)
 
 
+def add_department(request):
+    form = DepartmentForm(request.POST or None)
+    context = {'form': form, 'page_title': 'Add Department'}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            context['form'] = DepartmentForm()
+            messages.success(request, "Department Created")
+        else:
+            messages.error(request, "Invalid Form")
+    return render(request, 'admin_template/add_department_template.html', context)
+
+
+def edit_department(request, department_id):
+    department = get_object_or_404(Department, id=department_id)
+    form = DepartmentForm(request.POST or None, instance=department)
+    context = {
+        'form': form,
+        'department_id': department_id,
+        'page_title': 'Edit Department'
+    }
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Updated")
+            return redirect(reverse('edit_department', args=[department_id]))
+        else:
+            messages.error(request, "Please Fill Form Properly!")
+    else:
+        return render(request, "admin_template/edit_department_template.html", context)
+
+
 def add_officer(request):
     form = OfficerForm(request.POST or None, request.FILES or None)
     admin = CustomUserForm(request.POST or None)
@@ -197,30 +238,6 @@ def add_officer(request):
             officer.admin = admin
             officer.save()
             messages.success(request, "Successfully Added")
-            # Send mail
-            data = {'msg': "Welcome, Please use this password to login your account <b>" +
-                    str(request.POST.get('password'))+"</b> "}
-            msg_html = render_to_string(
-                'email/email.html', data)
-            msg_plain = render_to_string(
-                'email/email.txt', data)
-            message = "Hello There! Your SIWES account has been created. Further details are in your mail."
-            to = request.POST.get('phone')
-
-            full_url = settings.SMS_BASE_URL + 'message=' + message + '&to=' + to + \
-                '&sender=' + settings.SMS_SENDER + '&type=0&routing=3&token=' + settings.SMS_TOKEN
-
-            try:
-                r.get(full_url)
-                send_mail(
-                    'Account Creation',
-                    msg_plain,
-                    settings.EMAIL_HOST_USER,
-                    [request.POST.get('email')],
-                    html_message=msg_html,
-                )
-            except:
-                pass
             context['form'] = OfficerForm()
             context['form2'] = CustomUserForm()
         else:

@@ -1,0 +1,39 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block custom_css %}
+  <style>
+      .invalid{
+        font-style: italic;
+        font-weight: bold;
+        color: red;
+      }
+      .valid{
+        font-style: italic;
+        font-weight: bold;
+        color: green;
+      }
+  </style>
+{% endblock custom_css %}
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+
+                    {% include "admin_template/form_template.html" with messages=messages  form=form button_text="Add Department"%}
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
