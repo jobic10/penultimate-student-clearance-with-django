@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static 'plugins/jqvmap/jqvmap.min.css'%} ">
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css'%} ">
-    <!-- overlayScrollbars -->
+     <link rel="stylesheet" href="{% static 'toastr/toastr.min.css' %} "><!-- overlayScrollbars -->
     <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css'%} ">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css'%} ">
@@ -115,6 +115,8 @@
     <!-- JQVMap -->
     <script src="{% static 'plugins/jqvmap/jquery.vmap.min.js'%} "></script>
     <script src="{% static 'plugins/jqvmap/maps/jquery.vmap.usa.js'%} "></script>
+    <script src="{% static 'toastr/toastr.min.js' %}"></script>
+
     <!-- jQuery Knob Chart -->
     <script src="{% static 'plugins/jquery-knob/jquery.knob.min.js'%} "></script>
     <!-- daterangepicker -->
@@ -135,10 +137,13 @@
     {% if messages %}
     {% for message in messages  %}
 
-    <script>
+    <!-- <script>
         swal("{{ message.tags|title }}", "{{ message }}", "{{ message.tags }}");
-    </script>
+    </script> -->
 
+    <script>
+        toastr.{{ message.tags }}('{{ message }}"', '{{ message.tags|title }}');
+    </script>
     {% endfor %}
     {% endif %}
     {% block custom_js %}
