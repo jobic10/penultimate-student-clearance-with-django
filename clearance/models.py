@@ -48,6 +48,9 @@ class CustomUser(AbstractUser):
 class Department(models.Model):
     name = models.CharField(max_length=70, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Admin(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
