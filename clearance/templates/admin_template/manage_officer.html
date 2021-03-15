@@ -20,19 +20,17 @@
                                     <th>SN</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
+                                    <th>Department</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for company in companies %}
+                                {% for officer in officers %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{officer.officer.name}}</td>
                                     <td>{{officer.email}}</td>
-                                    <td>{{officer.phone}}</td>
-                                    <td>{{officer.officer.address}}</td>
+                                    <td>{{officer.officer.department}}</td>
                                     <td>
                                         <a href="{% url 'edit_officer' officer.officer.id %}" class="btn btn-primary">Edit</a> - 
                                         <a onclick="return confirm('Are you sure about this ?')" href="{% url 'delete_officer' officer.officer.id %}" class="btn btn-danger">Delete</a>

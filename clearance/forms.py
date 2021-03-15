@@ -94,7 +94,7 @@ class StudentForm(CustomUserForm):
 class OfficerForm(FormSettings):
     class Meta:
         model = Officer
-        fields = ['department']
+        fields = ['name', 'department']
 
 
 class DepartmentForm(FormSettings):

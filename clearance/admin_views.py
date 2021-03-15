@@ -248,8 +248,7 @@ def edit_officer(request, officer_id):
             return redirect(reverse('edit_officer', args=[officer_id]))
         else:
             messages.error(request, "Please Fill Form Properly!")
-    else:
-        return render(request, "admin_template/edit_officer_template.html", context)
+    return render(request, "admin_template/edit_officer_template.html", context)
 
 
 def delete_officer(request, officer_id):
