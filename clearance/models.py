@@ -81,6 +81,9 @@ class Student(models.Model):
 class Document(models.Model):
     name = models.CharField(max_length=60, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Upload(models.Model):
     document = models.ForeignKey(
