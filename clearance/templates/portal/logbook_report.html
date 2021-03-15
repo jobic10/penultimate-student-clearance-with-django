@@ -1,0 +1,73 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-gradient-dark mb-5">
+                    <div class="card-header">
+                      <h3 class="card-title">Personal Details</h3>
+                      <div class="card-tools">
+                        <!-- Buttons, labels, and many other things can be placed here! -->
+                        <!-- Here is a label for example -->
+                        <span class="badge badge-primary">{{ student.fullname }}</span>
+                      </div>
+                      <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body" align='center'>
+                        <img class="text-center img img-fluid img-circle" height="300" width="300"
+                        src="/media/{{student.picture}}" alt="">
+                        <hr>
+                       <strong>Full Name</strong> :  {{ student.fullname }}
+                       <hr>
+                       <strong> Reg. No </strong>:  {{ student.regno }}
+                       <hr>
+                       <strong></strong>Start Date </strong>:  {{ student.start_date }}
+                       <hr>
+                       <strong></strong>Email </strong>:  {{ student.admin.email }}
+                       <hr>
+                       <strong></strong>Phone </strong>:  {{ student.admin.phone }}
+                       <hr>
+                       <strong>Company </strong>:  {{ student.company }}
+                    </div>
+                    <!-- /.card-body -->
+                    <!-- /.card-footer -->
+                  </div>
+            {% for logbook in  logbooks %}
+            <div class="card card-dark mb-5">
+                <div class="card-header">
+                  <h3 class="card-title">Week {{ logbook.week }} - {{ logbook.created_at }}</h3>
+                  <div class="card-tools">
+                    <!-- Buttons, labels, and many other things can be placed here! -->
+                    <!-- Here is a label for example -->
+                    <span class="badge badge-primary">{{ logbook.student }}</span>
+                  </div>
+                  <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    {{ logbook.report|safe }}
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer bg-success">
+                    <b>Remark From Supervisor : </b>{{ logbook.remark|safe }} 
+                </div>
+                <!-- /.card-footer -->
+              </div>
+            
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+</div>
+   </section>   
+
+{% endblock content %}
+   

@@ -1,0 +1,40 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}} {% if not logbook.remark %} <span class="badge badge-info"> -  - - - Please update this logbook by filling the mini-form on the bottom of the report</span> {% endif %}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <h4 class="alert alert-success">Viewing {{ logbook.student }}'s Logbook For Week {{ logbook.week }} - {{ logbook.created_at }}</h4>
+                <hr>
+                {{ logbook.report|safe }}
+                <hr><hr>
+                <h4 class="alert alert-info">Your Remark</h4>
+                {% if logbook.remark %}
+                    {{ logbook.remark }}
+                    {% else %}
+                    <form action="{% url 'update_logbook' logbook.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                        <input type="text" name="remark" required id="" class="form-control"><br/>
+                        <input type="submit" value="Update" class="btn btn-success">
+                        </div> 
+                    </form>
+                {% endif %}
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

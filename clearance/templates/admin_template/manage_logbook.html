@@ -1,0 +1,94 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Full Name</th>
+                                    <th>Matric Number</th>
+                                    <th>Placement</th>
+                                    <th>Avatar</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for student in students %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{student.student.fullname}}</td>
+                                    <td>{{student.student.regno}}</td>
+                                    <td>
+                                        
+                                        {% if not student.student.company %}
+                                            No Placement Yet
+                                            {% else %}
+                                            {{student.student.company.name}}
+                                        {% endif %}
+                                            
+                                    </td>
+                                    <td>
+                                        {% if student.student.picture == ""  %}
+                                        No Image Yet
+                                        {% else %}
+                                        <img class="img img-fluid mb-2" height="100" width="100"
+                                            src="/media/{{student.student.picture}}" alt="">
+                                        {% endif %}
+                                    </td>
+                                    
+                                    <td>
+                                        <a href="{% url 'generate_report' student.student.id %}" class="float-left btn btn-primary">View Logbook</a>
+                                        <button type="button" class="float-right btn btn-primary" data-toggle="modal" data-target="#me_{{ student.student.id }}">Remark</button>
+                                    </td>
+                                    <div class="modal fade" id="me_{{ student.student.id }}">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">{{ student.student.fullname }}'s Remarks</h4>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <textarea name="remark" required class="form-control">{% if student.student.finalremark.remark %}{{ student.student.finalremark.remark }}{% endif %}</textarea>
+                                                        <input type="hidden" name="student_id"  value="{{ student.student.id }}">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </form>
+                                          </div>
+                                          <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                      </div>
+                                
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

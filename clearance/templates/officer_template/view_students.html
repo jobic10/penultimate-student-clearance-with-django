@@ -1,0 +1,54 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        {% if students.count < 1 %}
+                          <h4 class="alert alert-danger">Sorry, there are no students in your Company. Check back later!</h4>
+                        {% else %}
+                          
+                        {% endif %}
+                        
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Name</th>
+                                    <th>Reg. No</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for student in students %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{student.fullname}}</td>
+                                    <td>{{student.regno}}</td>
+                                    <td>{{student.admin.email}}</td>
+                                    <td>{{student.admin.phone}}</td>
+                                    <td><a href="{% url 'student_logbook' student.id %}" class="btn btn-info">View Logbook</a></td>
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

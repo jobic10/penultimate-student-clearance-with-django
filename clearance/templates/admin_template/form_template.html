@@ -1,0 +1,47 @@
+<form role="form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card-body">
+
+        {{ form.media }}
+
+        {% for field in form  %}
+        <div class="form-group">
+            <span class="text-danger">{{field.errors}}</span>
+            {{field.label_tag}}<br/>
+            {{field}}
+
+        </div>
+        {% endfor %}
+
+        
+        {% if form2 %}
+            
+        {% for field in form2  %}
+        <div class="form-group">
+            <span>{{field.errors}}</span>
+            {{field.label_tag}}<br/>
+            {{field}}
+
+        </div>
+        {% endfor %}
+
+        {% endif %}
+            
+
+
+
+
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary btn-block">
+            {% if button_text %}
+            {{button_text}}
+            {% else %}
+            Submit
+            {% endif %}
+
+        </button>
+    </div>
+</form>

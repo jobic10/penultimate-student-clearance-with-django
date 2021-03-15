@@ -1,0 +1,61 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <h4 class="alert alert-success">Viewing {{ student }}'s Logbook</h4>
+                        {% if logbooks.count > 0 %}
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Week</th>
+                                    <th>Remark</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for logbook in logbooks %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>Week {{logbook.week}}</td>
+                                    <td>
+                                        {% if logbook.remark %}
+                                        {{logbook.remark}}</td>
+                                        {% else %}
+<p class="badge alert-danger">No remarks yet</p>                                          
+
+                                        {% endif %}
+                                        
+                                    <td>{{logbook.created_at}}</td>
+                                    <td>
+                                        <a href="{% url 'view_this_logbook' logbook.id %}" class=" btn btn-primary">View</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table> 
+                        {% else %}
+                          <h4 class="alert alert-danger">This student has not filled anything. </h4>
+                        {% endif %}
+                        
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
