@@ -160,7 +160,7 @@ def manage_officer(request):
     officers = CustomUser.objects.filter(user_type=2)
     context = {
         'officers': officers,
-        'page_title': 'Manage Companies'
+        'page_title': 'Manage Officers'
     }
     return render(request, "admin_template/manage_officer.html", context)
 
@@ -272,7 +272,7 @@ def delete_officer(request, officer_id):
     officers = CustomUser.objects.filter(user_type=2)
     context = {
         'officers': officers,
-        'page_title': 'Manage Companies'
+        'page_title': 'Manage Officers'
     }
     officer = get_object_or_404(Officer, id=officer_id)
     admin = officer.admin
