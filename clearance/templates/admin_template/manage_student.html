@@ -22,7 +22,6 @@
                                     <th>Matric Number</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Placement</th>
                                     <th>Avatar</th>
                                     <th>Edit</th>
                                 </tr>
@@ -34,16 +33,7 @@
                                     <td>{{student.student.fullname}}</td>
                                     <td>{{student.student.regno}}</td>
                                     <td>{{student.email}}</td>
-                                    <td>{{student.phone}}</td>
-                                    <td>
-                                        
-                                        {% if not student.student.company %}
-                                            No Placement Yet
-                                            {% else %}
-                                            {{student.student.officer.name}}
-                                        {% endif %}
-                                            
-                                    </td>
+                                    <td>{{student.student.phone}}</td>
                                     <td>
                                         {% if student.student.picture == ""  %}
                                         No Image Yet
