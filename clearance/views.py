@@ -52,7 +52,7 @@ def print_report(request, student_id):
     # try:
     #     if user.user_type == '1':  # Admin
     #         pass
-    #     elif user.user_type == '2':  # Company
+    #     elif user.user_type == '2':  # Officer
     #         if user.company != student.company:
     #             messages.error(request, "Sorry, access to this is denied")
     #             return redirect(reverse('company_home'))
