@@ -52,6 +52,9 @@ class Department(models.Model):
 class Admin(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return "Admin : " + str(self.admin)
+
 
 class Officer(models.Model):
     name = models.CharField(max_length=70)

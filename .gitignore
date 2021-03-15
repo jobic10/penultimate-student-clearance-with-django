@@ -1,11 +1,20 @@
 # Django #
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Django stuff:
+*.log
+*.pot
+*.egg-info
 
 *.log
 *.pot
 *.pyc
 __pycache__
+
 db.sqlite3
-portal/migrations/
+clearance/migrations/
 static/
-# portal/templates
+# clearance/templates
 media/

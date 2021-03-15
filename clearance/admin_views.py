@@ -14,11 +14,12 @@ from django.conf import settings
 def admin_home(request):
     total_officer = Officer.objects.all().count()
     total_student = Student.objects.all().count()
+    total_department = Department.objects.all().count()
     context = {
         'page_title': "Administrative Dashboard",
         'total_students': total_student,
         'total_officers': total_officer,
-        'started': Student.objects.exclude(start_date=None).count()
+        'total_departments': total_department,
 
     }
     return render(request, 'admin_template/home_content.html', context)
@@ -131,6 +132,7 @@ def edit_student(request, student_id):
 
 
 def admin_view_profile(request):
+    print(request.user)
     admin = get_object_or_404(Admin, admin=request.user)
     form = CustomUserForm(
         request.POST or None, request.FILES or None, instance=admin.admin)
