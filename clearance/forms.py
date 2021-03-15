@@ -72,14 +72,14 @@ class StudentForm(CustomUserForm):
             raise forms.ValidationError(
                 "The given phone number exceeds 11 characters")
         if self.instance.pk is None:  # Insert
-            if CustomUser.objects.filter(phone=formPhone).exists():
+            if Student.objects.filter(phone=formPhone).exists():
                 raise forms.ValidationError(
                     "The given phone number is already registered")
         else:  # Update
             dbPhone = self.Meta.model.objects.get(
                 id=self.instance.pk).phone.lower()
             if dbPhone != formPhone:  # There has been changes
-                if CustomUser.objects.filter(phone=formPhone).exists():
+                if Student.objects.filter(phone=formPhone).exists():
                     raise forms.ValidationError(
                         "The given phone has already registered")
 
