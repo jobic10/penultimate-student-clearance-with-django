@@ -105,6 +105,30 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    {% url 'manage_officer' as manage_officer %}
+                    {% url 'edit_officer' company_id as edit_officer %}
+
+                    <a href="{{manage_officer}}"
+                        class="nav-link  {% if edit_officer == request.path or manage_officer == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Manage Officers 
+
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    {% url 'add_department' as add_department%}
+                    <a href="{{add_department}}" class="nav-link  {% if add_department == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Add Department
+                            
+                        </p>
+                    </a>
+                </li>
               
                   
                   
