@@ -36,7 +36,6 @@ urlpatterns = [
 
     path("officer/delete/<int:officer_id>",
          admin_views.delete_officer, name='delete_officer'),
-    path('logbook/view/all', admin_views.manage_logbook, name='manage_logbook'),
 
 
 
@@ -47,16 +46,8 @@ urlpatterns = [
     path("officer/home/", officer_views.officer_home, name='officer_home'),
     path("officer_view_profile", officer_views.officer_view_profile,
          name='officer_view_profile'),
-    path("officer/logbook/<int:logbook_id>", officer_views.view_logbook,
-         name='officer_view_logbook'),
-    path("officer/student/<int:student_id>/logbook", officer_views.view_student_logbook,
-         name='student_logbook'),
     path("officer/students/", officer_views.view_students,
          name='officer_students'),
-    path("officer/logbook/<int:logbook_id>/update/",
-         officer_views.update_logbook, name='update_logbook'),
-    path('officer/mass/remark', officer_views.mass_remark, name='mass_remark'),
-
 
 
 

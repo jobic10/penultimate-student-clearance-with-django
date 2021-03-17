@@ -151,4 +151,4 @@ SMS_SENDER = 'UNILORIN'
 SMS_BASE_URL = 'https://smartsmssolutions.com/api/json.php?'
 DEVELOPER = "Owonubi Job Sunday - 17/52HA127"
 SUPERVISOR = "Mr. H. A. Mojeed"
-APP_NAME = "E-SIWES"
+APP_NAME = "Penultimate Student Clearance System"

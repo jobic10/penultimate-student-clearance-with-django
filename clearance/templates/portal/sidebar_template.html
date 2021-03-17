@@ -68,18 +68,7 @@
                         </p>
                     </a>
                 </li> 
-                <li class="nav-item">
-                    {% url 'manage_logbook' as manage_logbook %}
-
-                    <a href="{{manage_logbook}}"
-                        class="nav-link  {% if manage_logbook == request.path %} active {% endif %}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Manage Logbook
-
-                        </p>
-                    </a>
-                </li>
+         
                 <li class="nav-item">
                     {% url 'add_officer' as add_officer%}
                     <a href="{{add_officer}}" class="nav-link  {% if add_officer == request.path %} active {% endif %}">

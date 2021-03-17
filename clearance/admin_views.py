@@ -260,14 +260,7 @@ def delete_officer(request, officer_id):
     officer = get_object_or_404(Officer, id=officer_id)
     admin = officer.admin
     # Check if any student is assigned to this officer
-    exist = Student.objects.filter(officer=officer).count()
-    if exist > 0:
-        messages.error(request, "Sorry, there exists " + str(exist) +
-                       " students assigned to this Officer. What would you like to do about this ?")
-    else:
-        admin.delete()
-        officer.delete()  # Delete Officer and Delete User
-
-        messages.success(request, "Officer has been deleted.")
-
+    admin.delete()
+    officer.delete()  # Delete Officer and Delete User
+    messages.success(request, "Officer has been deleted.")
     return redirect(reverse('manage_officer'))
