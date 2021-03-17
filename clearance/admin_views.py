@@ -261,7 +261,7 @@ def add_document(request):
 
 
 def edit_document(request, document_id):
-    department = get_object_or_404(Document, id=document_id)
+    document = get_object_or_404(Document, id=document_id)
     form = DocumentForm(request.POST or None, instance=document)
     context = {
         'form': form,
@@ -282,7 +282,7 @@ def edit_document(request, document_id):
 def manage_document(request):
     docs = Document.objects.all()
     context = {
-        'departments': docs,
+        'documents': docs,
         'page_title': 'Manage Documents'
     }
     return render(request, "admin_template/manage_document.html", context)

@@ -84,6 +84,7 @@ class Student(models.Model):
 
 class Document(models.Model):
     name = models.CharField(max_length=60, unique=True)
+    number = models.IntegerField(default=1, max_length=1)
 
     def __str__(self):
         return self.name
