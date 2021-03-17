@@ -280,9 +280,9 @@ def edit_document(request, document_id):
 
 
 def manage_document(request):
-    docs = Documents.objects.all()
+    docs = Document.objects.all()
     context = {
-        'documents': docs,
+        'departments': docs,
         'page_title': 'Manage Documents'
     }
-    return render(request, "admin_template/manage_department.html", context)
+    return render(request, "admin_template/manage_document.html", context)

@@ -105,8 +105,34 @@
                         </p>
                     </a>
                 </li>
+                
+              <li class="nav-item">
+                  {% url 'manage_department' as manage_department %}
+                  {% url 'edit_department' department_id as edit_department %}
 
-                <li class="nav-item">
+                  <a href="{{manage_department}}"
+                      class="nav-link  {% if edit_department == request.path or manage_department == request.path %} active {% endif %}">
+                      <i class="nav-icon fas fa-th"></i>
+                      <p>
+                          Manage Departments 
+
+                      </p>
+                  </a>
+              </li>
+             
+
+              <li class="nav-item">
+                  {% url 'add_document' as add_document%}
+                  <a href="{{add_document}}" class="nav-link  {% if add_document == request.path %} active {% endif %}">
+                      <i class="nav-icon fas fa-th"></i>
+                      <p>
+                          Add Documents
+                          
+                      </p>
+                  </a>
+              </li>
+            
+              <li class="nav-item">
                     {% url 'manage_documents' as manage_documents %}
                     {% url 'edit_document' document_id as edit_document %}
 
@@ -119,33 +145,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    {% url 'add_document' as add_document%}
-                    <a href="{{add_document}}" class="nav-link  {% if add_document == request.path %} active {% endif %}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Add Documents
-                            
-                        </p>
-                    </a>
-                </li>
-              
                   
-                  
-                <li class="nav-item">
-                    {% url 'manage_department' as manage_department %}
-                    {% url 'edit_department' department_id as edit_department %}
-
-                    <a href="{{manage_department}}"
-                        class="nav-link  {% if edit_department == request.path or manage_department == request.path %} active {% endif %}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Manage Departments 
-
-                        </p>
-                    </a>
-                </li>
-               
                 
 {% elif request.user.user_type == '2' %}
 {% comment %}
