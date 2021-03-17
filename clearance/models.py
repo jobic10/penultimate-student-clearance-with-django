@@ -78,6 +78,7 @@ class Student(models.Model):
     department = models.ForeignKey(
         Department, on_delete=models.SET_NULL, null=True)
     picture = models.ImageField(upload_to="students/")
+    direct_entry = models.BooleanField(default=False)
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
 

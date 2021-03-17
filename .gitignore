@@ -18,3 +18,6 @@ clearance/migrations/
 static/
 # clearance/templates
 media/
+clearance/models.py
+penultimate_clearance_system/__pycache__/settings.cpython-38.pyc
+penultimate_clearance_system/__pycache__/
