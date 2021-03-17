@@ -33,6 +33,13 @@ urlpatterns = [
     path("department/edit/<int:department_id>",
          admin_views.edit_department, name='edit_department'),
 
+    path("document/add", admin_views.add_document, name='add_document'),
+    path("document/manage/", admin_views.manage_document,
+         name='manage_documents'),
+
+    path("document/edit/<int:document_id>",
+         admin_views.edit_document, name='edit_document'),
+
 
     path("officer/delete/<int:officer_id>",
          admin_views.delete_officer, name='delete_officer'),

@@ -88,7 +88,7 @@ class StudentForm(CustomUserForm):
     class Meta(CustomUserForm.Meta):
         model = Student
         fields = CustomUserForm.Meta.fields + \
-            ['fullname', 'regno', 'picture', 'phone', 'department']
+            ['fullname', 'regno', 'picture', 'phone', 'department', 'direct_entry']
 
 
 class OfficerForm(FormSettings):
@@ -106,10 +106,19 @@ class DepartmentForm(FormSettings):
         fields = ['name']
 
 
+class DocumentForm(FormSettings):
+    def __init__(self, *args, **kwargs):
+        super(DocumentForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Document
+        fields = ['name']
+
+
 class StudentEditForm(FormSettings):
     def __init__(self, *args, **kwargs):
         super(StudentEditForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Student
-        fields = ['fullname', 'regno', 'picture', 'phone']
+        fields = ['fullname', 'regno', 'picture', 'phone', 'direct_entry']

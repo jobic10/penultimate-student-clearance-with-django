@@ -27,7 +27,7 @@
                         <h3 class="card-title">{{page_title}}</h3>
                     </div>
 
-                    {% include "admin_template/form_template.html" with messages=messages  form=form button_text="Add Department"%}
+                    {% include "admin_template/form_template.html" with messages=messages  form=form button_text=page_title%}
                 </div>
                 <!-- /.card -->
 

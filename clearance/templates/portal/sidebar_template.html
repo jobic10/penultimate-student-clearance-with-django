@@ -107,24 +107,24 @@
                 </li>
 
                 <li class="nav-item">
-                    {% url 'manage_officer' as manage_officer %}
-                    {% url 'edit_officer' company_id as edit_officer %}
+                    {% url 'manage_documents' as manage_documents %}
+                    {% url 'edit_document' document_id as edit_document %}
 
-                    <a href="{{manage_officer}}"
-                        class="nav-link  {% if edit_officer == request.path or manage_officer == request.path %} active {% endif %}">
+                    <a href="{{manage_documents}}"
+                        class="nav-link  {% if edit_document == request.path or manage_documents == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Manage Officers 
+                            Manage Documents 
 
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    {% url 'add_department' as add_department%}
-                    <a href="{{add_department}}" class="nav-link  {% if add_department == request.path %} active {% endif %}">
+                    {% url 'add_document' as add_document%}
+                    <a href="{{add_document}}" class="nav-link  {% if add_document == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Add Department
+                            Add Documents
                             
                         </p>
                     </a>

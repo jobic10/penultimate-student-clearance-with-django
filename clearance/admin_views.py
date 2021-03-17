@@ -158,25 +158,6 @@ def manage_department(request):
     return render(request, "admin_template/manage_department.html", context)
 
 
-def manage_logbook(request):
-    if request.method == 'POST':
-        student_id = request.POST.get('student_id', 0)
-        student = get_object_or_404(Student, id=student_id)
-        remark = request.POST.get('remark', None)
-        if remark is None:
-            messages.error(request, "Please fill in the remark!")
-        else:
-            obj, created = FinalRemark.objects.update_or_create(
-                student=student, defaults={'remark': remark})
-            messages.success(request, "Action Saved")
-    students = CustomUser.objects.filter(user_type=3)
-    context = {
-        'students': students,
-        'page_title': 'View Student\'s Logbook'
-    }
-    return render(request, "admin_template/manage_logbook.html", context)
-
-
 def add_department(request):
     form = DepartmentForm(request.POST or None)
     context = {'form': form, 'page_title': 'Add Department'}
@@ -264,3 +245,44 @@ def delete_officer(request, officer_id):
     officer.delete()  # Delete Officer and Delete User
     messages.success(request, "Officer has been deleted.")
     return redirect(reverse('manage_officer'))
+
+
+def add_document(request):
+    form = DocumentForm(request.POST or None)
+    context = {'form': form, 'page_title': 'Add Document'}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            context['form'] = DocumentForm()
+            messages.success(request, "Document Created")
+        else:
+            messages.error(request, "Invalid Form")
+    return render(request, 'admin_template/add_department_template.html', context)
+
+
+def edit_document(request, document_id):
+    department = get_object_or_404(Document, id=document_id)
+    form = DocumentForm(request.POST or None, instance=document)
+    context = {
+        'form': form,
+        'document_id': document_id,
+        'page_title': 'Edit Document'
+    }
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully Updated")
+            return redirect(reverse('edit_document', args=[document_id]))
+        else:
+            messages.error(request, "Please Fill Form Properly!")
+    else:
+        return render(request, "admin_template/edit_department_template.html", context)
+
+
+def manage_document(request):
+    docs = Documents.objects.all()
+    context = {
+        'documents': docs,
+        'page_title': 'Manage Documents'
+    }
+    return render(request, "admin_template/manage_department.html", context)
