@@ -15,7 +15,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         {% if students.count < 1 %}
-                          <h4 class="alert alert-danger">Sorry, there are no students in your Officer. Check back later!</h4>
+                          <h4 class="alert alert-danger">Sorry, there are no students in your Department. Check back later!</h4>
                         {% else %}
                           
                         {% endif %}
@@ -38,8 +38,8 @@
                                     <td>{{student.fullname}}</td>
                                     <td>{{student.regno}}</td>
                                     <td>{{student.admin.email}}</td>
-                                    <td>{{student.admin.phone}}</td>
-                                    <td><a href="{% url 'student_logbook' student.id %}" class="btn btn-info">View Logbook</a></td>
+                                    <td>{{student.phone}}</td>
+                                    <td><a href="{% url 'view_upload_by_id' student.id %}" class="btn btn-info">View Uploads</a></td>
                                 </tr>
                                 {% endfor %}
                                 

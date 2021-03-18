@@ -172,8 +172,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    {% url 'company_home' as company_home %}
-                    <a href="{{company_home}}" class="nav-link {% if company_home == request.path %} active {% endif %}">
+                    {% url 'officer_home' as officer_home %}
+                    <a href="{{officer_home}}" class="nav-link {% if officer_home == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-tags"></i>
                         <p>
                             Home
@@ -183,8 +183,8 @@
                 </li>
 
                 <li class="nav-item">
-                    {% url 'company_view_profile' as company_view_profile %}
-                    <a href="{{company_view_profile}}" class="nav-link {% if company_view_profile == request.path %} active {% endif %}">
+                    {% url 'officer_view_profile' as officer_view_profile %}
+                    <a href="{{officer_view_profile}}" class="nav-link {% if officer_view_profile == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-pencil-alt"></i>
                         <p>
                             View/Edit Profile
@@ -193,20 +193,11 @@
                     </a>
                 </li>
 
+                
                 <li class="nav-item">
-                    {% url 'mass_remark' as mass_remark %}
-                    <a href="{{mass_remark}}" class="nav-link {% if mass_remark == request.path %} active {% endif %}">
-                        <i class="nav-icon fas fa-reply-all"></i>
-                        <p>
-                            Mass Remark
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    {% url 'company_students' as company_students %}
-                    {% url 'student_logbook' student.id  as student_logbook %}
-                    {% url 'company_view_logbook' logbook.id as company_view_logbook %}
-                    <a href="{{company_students}}" class="nav-link {% if company_view_logbook == request.path or company_students == request.path or student_logbook == request.path %} active {% endif %}">
+                    {% url 'officer_students' as officer_students %}
+                    {% url 'view_upload_by_id' student.id as view_upload_by_id %}
+                    <a href="{{officer_students}}" class="nav-link {% if view_upload_by_id == request.path or officer_students == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             My Students

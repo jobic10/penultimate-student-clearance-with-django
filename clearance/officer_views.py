@@ -47,10 +47,24 @@ def officer_view_profile(request):
 
 
 def view_students(request):
-    me = request.user
-    students = Student.objects.filter(officer=me.officer)
+    me = get_object_or_404(Officer, admin=request.user)
+    # students = Student.objects.filter(officer=me.officer)
+    students = Student.objects.filter(
+        department=me.department)
     context = {
         'students': students,
         'page_title': 'View Students',
     }
     return render(request, "officer_template/view_students.html", context)
+
+
+def view_upload_by_id(request, id):
+    me = get_object_or_404(Officer, admin=request.user)
+    student = get_object_or_404(Student, id=id)
+    uploads = Upload.objects.filter(student=student)
+    context = {
+        'uploads': uploads,
+        'student': student,
+        'page_title': "View Student's Uploads",
+    }
+    return render(request, "officer_template/view_uploads.html", context)

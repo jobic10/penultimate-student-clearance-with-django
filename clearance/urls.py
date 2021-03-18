@@ -55,6 +55,8 @@ urlpatterns = [
          name='officer_view_profile'),
     path("officer/students/", officer_views.view_students,
          name='officer_students'),
+    path("officer/student/upload/view/<int:id>",
+         officer_views.view_upload_by_id, name='view_upload_by_id'),
 
 
 
