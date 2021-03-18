@@ -81,12 +81,13 @@ class Student(models.Model):
     picture = models.ImageField(upload_to="students/")
     direct_entry = models.BooleanField(default=False)
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    cleared = models.BooleanField(default=False)
 
 
 class Document(models.Model):
+    USERS = [(1, "UTME"), (2, "DE"), (3, "UTME/DE")]
     name = models.CharField(max_length=60, unique=True)
-    number = models.PositiveIntegerField(
-        default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
+    category = models.CharField(max_length=1, choices=USERS, default=1)
 
     def __str__(self):
         return self.name
