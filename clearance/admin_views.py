@@ -111,8 +111,7 @@ def edit_student(request, student_id):
             return redirect(reverse('edit_student', args=[student_id]))
         else:
             messages.error(request, "Please Fill Form Properly!")
-    else:
-        return render(request, "admin_template/edit_student_template.html", context)
+    return render(request, "admin_template/edit_student_template.html", context)
 
 
 def admin_view_profile(request):
@@ -186,8 +185,7 @@ def edit_department(request, department_id):
             return redirect(reverse('edit_department', args=[department_id]))
         else:
             messages.error(request, "Please Fill Form Properly!")
-    else:
-        return render(request, "admin_template/edit_department_template.html", context)
+    return render(request, "admin_template/edit_department_template.html", context)
 
 
 def add_officer(request):

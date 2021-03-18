@@ -8,13 +8,14 @@ from django.contrib.auth import update_session_auth_hash
 
 def officer_home(request):
     me = get_object_or_404(Officer, admin=request.user)
-    total_students = Student.objects.filter(officer=me).count()
-    pending_remarks = Logbook.objects.filter(
-        student__officer=me, remark=None).count()
-    approved_remarks = Logbook.objects.exclude(
-        student__officer=me, remark=None).count()
+    total_students = Student.objects.filter(
+        department=me.department).count()
+    pending_remarks = Student.objects.filter(
+        department=me.department, cleared=False).count()
+    approved_remarks = Student.objects.filter(
+        department=me.department, cleared=True).count()
     context = {
-        'page_title': 'Industrial-Based (Officer) Dashboard',
+        'page_title': 'Clearance Officer Dashboard',
         'total_students': total_students,
         'approved_remarks': approved_remarks,
         'pending_remarks': pending_remarks
