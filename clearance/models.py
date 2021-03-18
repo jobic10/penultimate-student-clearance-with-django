@@ -86,7 +86,7 @@ class Student(models.Model):
 class Document(models.Model):
     name = models.CharField(max_length=60, unique=True)
     number = models.PositiveIntegerField(
-        default=1, validators=[MinValueValidator(1), MaxValueValidator(2)])
+        default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
 
     def __str__(self):
         return self.name
@@ -96,3 +96,5 @@ class Upload(models.Model):
     document = models.ForeignKey(
         Document, on_delete=models.SET_NULL, null=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    approved = models.BooleanField(default=False)
+    remark = models.TextField(null=True)
