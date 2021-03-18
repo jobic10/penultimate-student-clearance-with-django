@@ -10,11 +10,12 @@ from django.conf import settings
 
 def student_home(request):
     student = get_object_or_404(Student, admin=request.user)
-    count = Logbook.objects.filter(student=student).count()
+    uploads = Upload.objects.filter(student=student).count()
     context = {
         'page_title': 'Dashboard',
-        'percent_present': count,
-        'pending': Logbook.objects.filter(student=student, remark=None).count()
+        'uploads': uploads,
+        'student': student,
+        'pending': Upload.objects.filter(student=student, approved=False).count()
     }
     return render(request, 'student_template/home_content.html', context)
 
