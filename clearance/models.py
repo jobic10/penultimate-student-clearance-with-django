@@ -85,7 +85,7 @@ class Student(models.Model):
 
 
 class Document(models.Model):
-    USERS = [(1, "UTME"), (2, "DE"), (3, "UTME/DE")]
+    USERS = [('1', "UTME"), ('2', "DE"), ('3', "UTME/DE")]
     name = models.CharField(max_length=60, unique=True)
     category = models.CharField(max_length=1, choices=USERS, default=1)
 

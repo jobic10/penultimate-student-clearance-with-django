@@ -19,7 +19,7 @@
                                 <tr>
                                     <th>SN</th>
                                     <th>Name</th>
-                                    <th>Maximum number of uploads</th>
+                                    <th>Type</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
@@ -28,7 +28,16 @@
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{document.name}}</td>
-                                    <td>{{document.number}}</td>
+                                    <td>
+                                        {% if document.category == '1' %}
+                                          UTME
+                                        {% elif document.category == '2' %}
+                                          DE
+                                          {% else %}
+                                          UTME/DE
+                                        {% endif %}
+                                        
+                                    </td>
                                     <td>
                                         <a href="{% url 'edit_document' document.id %}" class="btn btn-primary">Edit</a> 
                                         

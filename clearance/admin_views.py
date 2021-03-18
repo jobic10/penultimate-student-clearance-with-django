@@ -275,8 +275,7 @@ def edit_document(request, document_id):
             return redirect(reverse('edit_document', args=[document_id]))
         else:
             messages.error(request, "Please Fill Form Properly!")
-    else:
-        return render(request, "admin_template/edit_department_template.html", context)
+    return render(request, "admin_template/edit_department_template.html", context)
 
 
 def manage_document(request):

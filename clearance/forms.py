@@ -112,7 +112,7 @@ class DocumentForm(FormSettings):
 
     class Meta:
         model = Document
-        fields = ['name']
+        fields = ['name', 'category']
 
 
 class StudentEditForm(FormSettings):
