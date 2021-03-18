@@ -34,7 +34,7 @@
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{upload.document.name}}</td>
-                                    <td>{{upload.file}}</td>
+                                    <td>/media/{{upload.file}}</td>
                                     <td><a href="" onclick="return confirm('Are you sure about this ?')" class="btn btn-success">
                                         Approve
                                       </button> - <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#a{{ upload.id }}">
