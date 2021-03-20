@@ -44,5 +44,9 @@ def student_view_profile(request):
     return render(request, "student_template/student_view_profile.html", context)
 
 
-def get_weeks_from_today(date):
-    pass
+def uploadDocument(request):
+    student = get_object_or_404(Student, admin=request.user)
+    form = UploadForm(request.POST or None,
+                      request.FILES or None, student=student)
+    context = {'form': form, 'page_title': "Upload Document"}
+    return render(request, 'admin_template/add_department_template.html', context)

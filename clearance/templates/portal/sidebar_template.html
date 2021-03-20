@@ -265,7 +265,7 @@
                     </a>
                 </li>
                 {% url 'add_new_logbook' as add_new_logbook %}
-          {% url 'my_logbook' as my_logbook %}
+          {% url 'upload_document' as upload_document %}
           {% url 'view_this_logbook' logbook.id as this_logbook %}
           {% url 'generate_report' request.user.student.id as generate_report %}
                 <li class="nav-item">
@@ -278,23 +278,23 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                        <a href="{{ add_new_logbook  }}" class="nav-link">
-                          <i class="fas fa-plus nav-icon"></i>
-                          <p>New Report</p>
+                        <a href="{{ upload_document  }}" class="nav-link">
+                          <i class="fas fa-upload nav-icon"></i>
+                          <p>Upload</p>
                         </a>
                       </li>
                       <li class="nav-item">
                         <a href="{{ my_logbook }}" class="nav-link">
-                          <i class="fas fa-search nav-icon"></i>
-                          <p>View Reports <span class="badge badge-info">{{ COUNT }}</span> </p>
+                          <i class="fas fa-file nav-icon"></i>
+                          <p>View Uploads</p>
                         </a>
                       </li>    
-                      <li class="nav-item">
+                      <!-- <li class="nav-item">
                         <a href="{{ generate_report }}" class="nav-link">
                           <i class="fas fa-print nav-icon"></i>
                           <p>Print</p>
                         </a>
-                      </li>
+                      </li> -->
                     </ul>
                   </li>
           

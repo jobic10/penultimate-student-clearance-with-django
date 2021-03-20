@@ -122,3 +122,21 @@ class StudentEditForm(FormSettings):
     class Meta:
         model = Student
         fields = ['fullname', 'regno', 'picture', 'phone', 'direct_entry']
+
+
+class UploadForm(FormSettings):
+    cat = '1'
+    document = forms.ModelChoiceField(
+        queryset=Document.objects.exclude(category=cat).order_by('name'))
+
+    def __init__(self, *args, **kwargs):
+        self.student = kwargs.pop('student', None)
+        if self.student.direct_entry:
+            UploadForm.cat = '2'
+        else:
+            UploadForm.cat = '1'
+        super(UploadForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Upload
+        fields = ['document', 'file']
