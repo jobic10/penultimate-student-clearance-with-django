@@ -83,6 +83,9 @@ class Student(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     cleared = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.fullname
+
 
 class Document(models.Model):
     USERS = [('1', "UTME"), ('2', "DE"), ('3', "UTME/DE")]
@@ -99,4 +102,7 @@ class Upload(models.Model):
     file = models.ImageField(upload_to="documents")
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
-    remark = models.TextField(null=True)
+    remark = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.student) + " uploaded " + str(self.document)
