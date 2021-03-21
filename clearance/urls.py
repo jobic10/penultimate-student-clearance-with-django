@@ -66,6 +66,10 @@ urlpatterns = [
          name='student_view_profile'),
     path("student/document/upload",
          student_views.uploadDocument, name='upload_document'),
-
+    path("student/document/view", student_views.viewUploads, name="view_document"),
+    path("student/document/delete/<int:id>",
+         student_views.delete_document, name="delete_document"),
+    path("student/document/edit/<int:id>",
+         student_views.edit_document, name="edit_document"),
 
 ]

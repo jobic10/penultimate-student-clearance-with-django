@@ -58,3 +58,31 @@ def uploadDocument(request):
         else:
             messages.error(request, "Invalid Form Submitted")
     return render(request, 'admin_template/add_department_template.html', context)
+
+
+def viewUploads(request):
+    student = get_object_or_404(Student, admin=request.user)
+    uploads = Upload.objects.filter(student=student)
+    context = {'page_title': 'Viewing Uploads', 'uploads': uploads}
+    return render(request, "student_template/view_upload.html", context)
+
+
+def delete_document(request, id):
+    student = get_object_or_404(Student, admin=request.user)
+    upload = get_object_or_404(Upload, id=id, student=student)
+    return HttpResponse(upload)
+
+
+def edit_document(request, id):
+    student = get_object_or_404(Student, admin=request.user)
+    upload = get_object_or_404(Upload, id=id, student=student)
+    form = UploadForm(request.POST or None,
+                      request.FILES or None, instance=upload, student=student)
+    context = {'page_title': "Update Document", "form": form}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Document Updated")
+        else:
+            messages.error(request, "Document Could Not Be Uploaded")
+    return render(request, 'admin_template/add_department_template.html', context)

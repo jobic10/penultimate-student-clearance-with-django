@@ -15,10 +15,9 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         {% if uploads.count < 1 %}
-                          <h4 class="alert alert-danger">Sorry, there are no students in your Department. Check back later!</h4>
+                          <h4 class="alert alert-danger">Oops, you are yet to make uploads!</h4>
                         {% else %}
                           
-                        {% endif %}
                         
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
@@ -62,6 +61,8 @@
                                 
                             </tbody>
                         </table>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>

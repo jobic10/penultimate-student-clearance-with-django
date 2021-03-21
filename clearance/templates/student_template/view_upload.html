@@ -14,41 +14,41 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <h4 class="alert alert-success">Viewing {{ student }}'s Logbook</h4>
-                        {% if logbooks.count > 0 %}
+                        {% if uploads.count > 0 %}
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>SN</th>
-                                    <th>Week</th>
-                                    <th>Remark</th>
-                                    <th>Created At</th>
+                                    <th>Document</th>
+                                    <th>Approved</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for logbook in logbooks %}
+                                {% for upload in uploads %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                    <td>Week {{logbook.week}}</td>
-                                    <td>
-                                        {% if logbook.remark %}
-                                        {{logbook.remark}}</td>
+                                    <td>{{ upload.document }}</td>
+                                    <td>{{ upload.approved }}
+{% if not upload.approved %} : <p class="badge alert-danger">
+{% if upload.remark %}
+                                        {{upload.remark}}</td>
                                         {% else %}
-<p class="badge alert-danger">No remarks yet</p>                                          
-
-                                        {% endif %}
-                                        
-                                    <td>{{logbook.created_at}}</td>
+No remarks yet
+{% endif %}</p> 
+{% endif %}
+                                    </td>
                                     <td>
-                                        <a href="{% url 'view_this_logbook' logbook.id %}" class=" btn btn-primary">View</a>
+                                        <a href="{% url 'edit_document' upload.id %}" class="btn btn-info">Edit</a> - 
+                                        <a href="{% url 'delete_document' upload.id %}" class="btn btn-danger" onclick="return confirm('Are you sure about this ?')">Delete</a>
+                                    
                                     </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table> 
                         {% else %}
-                          <h4 class="alert alert-danger">This student has not filled anything. </h4>
+                          <h4 class="alert alert-danger">You are yet to upload. </h4>
                         {% endif %}
                         
                      

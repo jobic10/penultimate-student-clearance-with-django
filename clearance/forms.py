@@ -130,6 +130,8 @@ class UploadForm(FormSettings):
         queryset=Document.objects.exclude(category=cat).order_by('name'))
 
     def __init__(self, *args, **kwargs):
+        if kwargs.get('instance'):
+            instance = kwargs.get('instance').__dict__
         self.student = kwargs.pop('student', None)
         if self.student.direct_entry:
             UploadForm.cat = '2'
@@ -142,8 +144,9 @@ class UploadForm(FormSettings):
         check = Upload.objects.filter(
             student=self.student, document=document).exists()
         if check:
-            raise forms.ValidationError(
-                "You have already uploaded for " + str(document))
+            if self.instance.pk is None or self.instance.document != document:
+                raise forms.ValidationError(
+                    "You have already uploaded for " + str(document))
         return document
 
     class Meta:
