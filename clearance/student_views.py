@@ -78,7 +78,8 @@ def edit_document(request, id):
     upload = get_object_or_404(Upload, id=id, student=student)
     form = UploadForm(request.POST or None,
                       request.FILES or None, instance=upload, student=student)
-    context = {'page_title': "Update Document", "form": form}
+    context = {'page_title': "Update Document",
+               "form": form, 'upload_id': upload.id}
     if request.method == 'POST':
         if form.is_valid():
             form.save()

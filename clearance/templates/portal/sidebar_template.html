@@ -267,10 +267,10 @@
                 {% url 'add_new_logbook' as add_new_logbook %}
           {% url 'upload_document' as upload_document %}
           {% url 'view_document' as view_document %}
-          {% url 'view_this_logbook' logbook.id as this_logbook %}
+          {% url 'edit_document' upload_id as edit_document %}
           {% url 'generate_report' request.user.student.id as generate_report %}
                 <li class="nav-item">
-                    <a href="#" class="nav-link  {% if add_new_logbook == request.path or request.path == this_logbook or request.path == view_document %} active {% endif %}">
+                    <a href="#" class="nav-link  {% if upload_document == request.path or add_new_logbook == request.path or request.path == edit_document or request.path == view_document %} active {% endif %}">
                       <i class="nav-icon fas fa-table"></i>
                       <p>
                         Documents
