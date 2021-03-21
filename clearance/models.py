@@ -1,4 +1,5 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
+from .validators import validate_file_extension
 from django.db import models
 from django.dispatch import receiver
 from django.contrib.auth.hashers import make_password
@@ -99,7 +100,8 @@ class Document(models.Model):
 class Upload(models.Model):
     document = models.ForeignKey(
         Document, on_delete=models.SET_NULL, null=True)
-    file = models.FileField(upload_to="documents")
+    file = models.FileField(upload_to="documents",  validators=[
+                            validate_file_extension])
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
     remark = models.TextField(null=True, blank=True)
