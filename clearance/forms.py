@@ -142,8 +142,11 @@ class UploadForm(FormSettings):
     def clean_document(self, *args, **kwargs):
         document = self.cleaned_data.get('document')
         check = Upload.objects.filter(
-            student=self.student, document=document).exists()
-        if check:
+            student=self.student, document=document)
+        if check.exists():
+            if check[0].approved:
+                raise forms.ValidationError(
+                    "This has already been approved ")
             if self.instance.pk is None or self.instance.document != document:
                 raise forms.ValidationError(
                     "You have already uploaded for " + str(document))
