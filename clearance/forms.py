@@ -137,15 +137,32 @@ class UploadForm(FormSettings):
             UploadForm.cat = '1'
         super(UploadForm, self).__init__(*args, **kwargs)
 
-    def save(self, commit=True):
-        form = super(UploadForm, self).save(commit=False)
+    # def clean_document(self, commit=True):
+    #     form = super(UploadForm, self).save(commit=False)
+    #     document = self.cleaned_data.get('document')
+    #     else:
+    #         print("Does not exist")
+    def clean_document(self, *args, **kwargs):
         document = self.cleaned_data.get('document')
         check = Upload.objects.filter(
             student=self.student, document=document).exists()
         if check:
-            print("Exist")
-        else:
-            print("Does not exist")
+            raise forms.ValidationError(
+                "You have already uploaded for " + str(document))
+
+        # if self.instance.pk is None:  # Insert
+        #     if CustomUser.objects.filter(email=formEmail).exists():
+        #         print("CustomUser.objects.filter(phone=formPhone).exists()")
+        #         raise forms.ValidationError(
+        #             "The given email is already registered")
+        # else:  # Update
+        #     dbEmail = self.Meta.model.objects.get(
+        #         id=self.instance.pk).email.lower()
+        #     if dbEmail != formEmail:  # There has been changes
+        #         if CustomUser.objects.filter(email=formEmail).exists():
+        #             raise forms.ValidationError(
+        #                 "The given email is already registered")
+        return document
 
     class Meta:
         model = Upload
