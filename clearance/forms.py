@@ -137,6 +137,16 @@ class UploadForm(FormSettings):
             UploadForm.cat = '1'
         super(UploadForm, self).__init__(*args, **kwargs)
 
+    def save(self, commit=True):
+        form = super(UploadForm, self).save(commit=False)
+        document = self.cleaned_data.get('document')
+        check = Upload.objects.filter(
+            student=self.student, document=document).exists()
+        if check:
+            print("Exist")
+        else:
+            print("Does not exist")
+
     class Meta:
         model = Upload
         fields = ['document', 'file']

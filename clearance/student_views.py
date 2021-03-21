@@ -49,4 +49,9 @@ def uploadDocument(request):
     form = UploadForm(request.POST or None,
                       request.FILES or None, student=student)
     context = {'form': form, 'page_title': "Upload Document"}
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+        else:
+            messages.error(request, "Invalid Form Submitted")
     return render(request, 'admin_template/add_department_template.html', context)
