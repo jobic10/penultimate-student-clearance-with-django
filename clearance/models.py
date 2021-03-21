@@ -99,7 +99,7 @@ class Document(models.Model):
 class Upload(models.Model):
     document = models.ForeignKey(
         Document, on_delete=models.SET_NULL, null=True)
-    file = models.ImageField(upload_to="documents")
+    file = models.FileField(upload_to="documents")
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
     remark = models.TextField(null=True, blank=True)
