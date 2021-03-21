@@ -39,8 +39,16 @@ No remarks yet
 {% endif %}
                                     </td>
                                     <td>
+                                        {% if not upload.approved %}
                                         <a href="{% url 'edit_document' upload.id %}" class="btn btn-info">Edit</a> - 
                                         <a href="{% url 'delete_document' upload.id %}" class="btn btn-danger" onclick="return confirm('Are you sure about this ?')">Delete</a>
+                                          
+                                        {% else %}
+
+                                        <i class="fas fa-check"></i>
+                                          
+                                        {% endif %}
+                                        
                                     
                                     </td>
                                 </tr>

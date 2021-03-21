@@ -47,7 +47,14 @@
 {% if disable %}
   <td>Cleared <i class="fas fa-check"></i></td>
 {% else %}
-                                    <td><a href="{% url 'view_upload_by_id' student.id %}" class="btn btn-info">View Uploads</a></td>
+{% if pending %}
+<td><a href="{% url 'view_upload_by_id' student.id %}" class="btn btn-info">View Uploads</a></td>
+  
+{% else %}
+<td><a href="{% url 'view_upload_by_id' student.id %}" class="btn btn-info">View Uploads</a></td>
+  
+{% endif %}
+
 {% endif %}
 
                                 </tr>

@@ -15,7 +15,8 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         {% if uploads.count < 1 %}
-                          <h4 class="alert alert-danger">Oops, you are yet to make uploads!</h4>
+                          <h4 class="alert alert-info">No pending uploads for this student!</h4>
+                          <p>Kindly take a look at all uploads for this student instead <a href="{% url "view_upload_by_id" student.id %}" class="btn btn-success">here</a></p>
                         {% else %}
                           
                         

@@ -57,10 +57,13 @@ urlpatterns = [
          name='officer_students'),
     path("officer/student/upload/view/<int:id>",
          officer_views.view_upload_by_id, name='view_upload_by_id'),
+    path("officer/student/upload/pending/view/<int:id>",
+         officer_views.view_pending_upload_by_id, name='view_pending_upload_by_id'),
     path("officer/students/approved",
          officer_views.approved_students, name="approved_students"),
     path("officer/students/pending",
          officer_views.pending_students, name="pending_students"),
+    path("officer/upload/save", officer_views.upload_save, name="upload_save"),
 
 
 
