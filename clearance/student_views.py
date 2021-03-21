@@ -70,7 +70,13 @@ def viewUploads(request):
 def delete_document(request, id):
     student = get_object_or_404(Student, admin=request.user)
     upload = get_object_or_404(Upload, id=id, student=student)
-    return HttpResponse(upload)
+    if upload.approved:
+        messages.error(
+            request, "Sorry, this upload has already been approved... You cannot delete this!")
+    else:
+        upload.delete()
+        messages.success(request, "Upload has been deleted!")
+    return redirect(reverse('view_document'))
 
 
 def edit_document(request, id):
