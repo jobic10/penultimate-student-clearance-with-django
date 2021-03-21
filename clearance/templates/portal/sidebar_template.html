@@ -206,7 +206,26 @@
                     </a>
                 </li>
 
-          
+                
+                                <li class="nav-item">
+                                    {% url 'pending_students' as pending_students %}
+                                    <a href="{{pending_students}}" class="nav-link {% if pending_students == request.path %} active {% endif %}">
+                                        <i class="nav-icon fas fa-question"></i>
+                                        <p>
+                                            Pending Students
+                                        </p>
+                                    </a>
+                                </li>
+                <li class="nav-item">
+                    {% url 'approved_students' as approved_students %}
+                    <a href="{{approved_students}}" class="nav-link {% if approved_students == request.path %} active {% endif %}">
+                        <i class="nav-icon fas fa-check"></i>
+                        <p>
+                            Approved Students
+
+                        </p>
+                    </a>
+                </li>
 {% else %}
 
 {% comment %}

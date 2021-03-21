@@ -46,18 +46,6 @@ def officer_view_profile(request):
     return render(request, "officer_template/officer_view_profile.html", context)
 
 
-def view_students(request):
-    me = get_object_or_404(Officer, admin=request.user)
-    # students = Student.objects.filter(officer=me.officer)
-    students = Student.objects.filter(
-        department=me.department)
-    context = {
-        'students': students,
-        'page_title': 'View Students',
-    }
-    return render(request, "officer_template/view_students.html", context)
-
-
 def view_upload_by_id(request, id):
     me = get_object_or_404(Officer, admin=request.user)
     student = get_object_or_404(Student, id=id)
@@ -68,3 +56,40 @@ def view_upload_by_id(request, id):
         'page_title': "View Student's Uploads",
     }
     return render(request, "officer_template/view_uploads.html", context)
+
+
+def view_students(request):
+    me = get_object_or_404(Officer, admin=request.user)
+    # students = Student.objects.filter(officer=me.officer)
+    students = Student.objects.filter(
+        department=me.department)
+    context = {
+        'students': students,
+        'page_title': 'View All Students',
+    }
+    return render(request, "officer_template/view_students.html", context)
+
+
+def pending_students(request):
+    me = get_object_or_404(Officer, admin=request.user)
+    # students = Student.objects.filter(officer=me.officer)
+    students = Student.objects.filter(
+        department=me.department, cleared=False)
+    context = {
+        'students': students,
+        'page_title': 'View Pending Students',
+    }
+    return render(request, "officer_template/view_students.html", context)
+
+
+def approved_students(request):
+    me = get_object_or_404(Officer, admin=request.user)
+    # students = Student.objects.filter(officer=me.officer)
+    students = Student.objects.filter(
+        department=me.department, cleared=True)
+    context = {
+        'students': students,
+        'page_title': 'View Approved Students',
+        'disable': True
+    }
+    return render(request, "officer_template/view_students.html", context)

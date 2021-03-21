@@ -15,7 +15,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         {% if students.count < 1 %}
-                          <h4 class="alert alert-danger">Sorry, there are no students in your Department. Check back later!</h4>
+                          <h4 class="alert alert-warning">Sorry, there are no students. Check back later!</h4>
                         {% else %}
                           
                         {% endif %}
@@ -28,7 +28,12 @@
                                     <th>Reg. No</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Action</th>
+                              {% if disable %}
+                                <th>Status</th>
+                              {% else %}
+                              <th>Action</th>
+                                
+                              {% endif %}
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,7 +44,12 @@
                                     <td>{{student.regno}}</td>
                                     <td>{{student.admin.email}}</td>
                                     <td>{{student.phone}}</td>
+{% if disable %}
+  <td>Cleared <i class="fas fa-check"></i></td>
+{% else %}
                                     <td><a href="{% url 'view_upload_by_id' student.id %}" class="btn btn-info">View Uploads</a></td>
+{% endif %}
+
                                 </tr>
                                 {% endfor %}
                                 
