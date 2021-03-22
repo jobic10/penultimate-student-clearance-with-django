@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Third Party Apps
     'rest_framework',
+    'rest_framework.authtoken',
 
     # Personal Apps
     'clearance.apps.ClearanceConfig'
@@ -152,3 +153,11 @@ SMS_BASE_URL = 'https://smartsmssolutions.com/api/json.php?'
 DEVELOPER = "Owonubi Job Sunday - 17/52HA127"
 SUPERVISOR = "Mr. H. A. Mojeed"
 APP_NAME = "Penultimate Student Clearance System"
+
+
+# REST
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
