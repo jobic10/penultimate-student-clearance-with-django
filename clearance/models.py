@@ -87,6 +87,10 @@ class Student(models.Model):
     def __str__(self):
         return self.fullname
 
+    @property
+    def department_name(self):
+        return self.category.name
+
 
 class Document(models.Model):
     USERS = [('1', "UTME"), ('2', "DE"), ('3', "UTME/DE")]

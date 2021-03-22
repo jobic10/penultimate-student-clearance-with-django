@@ -3,6 +3,8 @@ from clearance.models import *
 
 
 class StudentSerializer(serializers.ModelSerializer):
+    department = serializers.CharField(source='department.name')
+
     class Meta:
         model = Student
         fields = ['fullname', 'regno', 'phone', 'gender',

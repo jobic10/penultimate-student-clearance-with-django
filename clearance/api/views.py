@@ -13,3 +13,23 @@ def student_detail(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = StudentSerializer(student)
     return Response(serializer.data)
+
+
+@api_view(['PUT', ])
+def change_password(request, id):
+    try:
+        student = Student.objects.get(id=id)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = StudentSerializer(student, data=request.data)
+    data = {}
+    if serializer.is_valid():
+        serializer.save()
+        data["status"] = "Success"
+        return Response(data=data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE', ])
+def delete_upload(request, id):
+    pass
