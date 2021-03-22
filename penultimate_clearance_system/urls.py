@@ -22,5 +22,5 @@ urlpatterns = [
     path('', include('clearance.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
     path('admin/', admin.site.urls),
-    path('api/', include('rest_framework.urls'))
+    path('api/', include('clearance.api.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
