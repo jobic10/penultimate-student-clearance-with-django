@@ -7,6 +7,7 @@ from .serializers import *
 
 
 @api_view(['GET', ])
+@permission_classes((IsAuthenticated,))
 def student_detail(request, id):
     try:
         student = Student.objects.get(id=id)
