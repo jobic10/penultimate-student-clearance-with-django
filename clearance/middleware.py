@@ -8,7 +8,7 @@ class LoginCheckMiddleWare(MiddlewareMixin):
         modulename = view_func.__module__
         user = request.user  # Who is the current user ?
         print(modulename)
-        if modulename == 'clearance.api.views' or modulename == 'django.views.static':
+        if modulename == 'clearance.api.views' or modulename == 'django.views.static' or modulename == 'rest_framework.authtoken.views':
             pass
         else:
             if user.is_authenticated:

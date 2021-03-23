@@ -143,7 +143,7 @@ MEDIA_ROOT = 'media'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'clearance.CustomUser'
-AUTHENTICATION_BACKENDS = ['clearance.email_backend.EmailBackend']
+# AUTHENTICATION_BACKENDS = ['clearance.email_backend.EmailBackend']
 
 
 SMS_TOKEN = os.environ.get('SMS_TOKEN')
