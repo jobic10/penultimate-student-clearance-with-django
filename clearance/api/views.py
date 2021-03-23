@@ -14,7 +14,7 @@ def student_detail(request, id):
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
     user = request.user
-    if user.student != user:
+    if user.student != student:
         return Response({'response': "You do not have access to this resource", 'error': True})
     serializer = StudentSerializer(student)
     return Response(serializer.data)
