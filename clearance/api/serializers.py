@@ -9,3 +9,13 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ['fullname', 'regno', 'phone', 'gender',
                   'department', 'picture', 'direct_entry', 'admin', 'cleared']
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = CustomUser
+
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

@@ -20,25 +20,33 @@ def student_detail(request, id):
     return Response(serializer.data)
 
 
-@api_view(['PUT', ])
+@api_view(['POST', ])
 @permission_classes((IsAuthenticated,))
-def change_password(request, id):
-    try:
-        student = Student.objects.get(id=id)
-    except:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+def reset_password(request):
+    # try:
+    #     student = Student.objects.get(id=id)
+    # except:
+    #     return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = ChangePasswordSerializer(data=request.data)
-    if serializer.is_valid():
-        old_password = serializer.data.get("old_password")
-        user = request.user
-        user.check_password(old_password)
-    serializer = StudentSerializer(student, data=request.data)
     data = {}
     if serializer.is_valid():
-        serializer.save()
-        data["status"] = "Success"
-        return Response(data=data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        old_password = serializer.data.get("old_password")
+        new_password = serializer.data.get("new_password")
+        user = request.user
+        if user.check_password(old_password):
+            request.user.set_password(serializer.data.get('new_password'))
+            request.user.save()
+            data["error"] = False
+            data["msg"] = "Password changed"
+        else:
+            data["error"] = True
+            data["msg"] = "Old Password Not Correct"
+    # # serializer = StudentSerializer(student, data=request.data)
+    # if serializer.is_valid():
+    #     serializer.save()
+    #     data["status"] = "Success"
+    #     return Response(data=data)
+    return Response(data)
 
 
 @api_view(['DELETE', ])
