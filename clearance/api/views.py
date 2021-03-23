@@ -21,11 +21,17 @@ def student_detail(request, id):
 
 
 @api_view(['PUT', ])
+@permission_classes((IsAuthenticated,))
 def change_password(request, id):
     try:
         student = Student.objects.get(id=id)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ChangePasswordSerializer(data=request.data)
+    if serializer.is_valid():
+        old_password = serializer.data.get("old_password")
+        user = request.user
+        user.check_password(old_password)
     serializer = StudentSerializer(student, data=request.data)
     data = {}
     if serializer.is_valid():
