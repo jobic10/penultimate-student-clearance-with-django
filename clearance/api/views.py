@@ -111,3 +111,31 @@ def my_docs(request):
     docs = Document.objects.exclude(category=cat)
     data = DocumentSerializer(docs, many=True)
     return Response(data.data)
+
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def get_upload_status(request, upload_id):
+    user = request.user
+    upload = Upload.objects.filter(id=upload_id)
+    data = {}
+    if upload.exists():
+        upload = upload[0]
+        if upload.student != user.student:
+            data["error"] = True
+            data["msg"] = "You do not have access to this resource "
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        if upload.approved:
+            msg = "Approved"
+        else:
+            if upload.remark is None:
+                msg = "Pending"
+            else:
+                msg = "Not Approved : " + str(upload.remark)
+        data['error'] = False
+        data['msg'] = msg
+        return Response(data)
+    else:
+        data['error'] = True
+        data['msg'] = "Access Denied"
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
