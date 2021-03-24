@@ -68,9 +68,7 @@ def upload_docs(request):
         data["error"] = True
         data["msg"] = "Invalid Document "
         return Response(data, status=status.HTTP_400_BAD_REQUEST)
-    print(document)
     my_docs = list(Document.objects.values_list('pk').exclude(category=cat))
-    print(str(my_docs) + "For Id " + str(tuple(doc)))
     if document not in my_docs:
         data["error"] = True
         data['msg'] = "You do not have access to this resource"
