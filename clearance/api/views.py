@@ -139,3 +139,21 @@ def get_upload_status(request, upload_id):
         data['error'] = True
         data['msg'] = "Access Denied"
         return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def my_uploads(request):
+    user = request.user
+    data = {}
+    uploads = Upload.objects.filter(student=user.student)
+    if uploads.exists():
+        data['error'] = False
+        data['msg'] = "There are " + str(len(uploads)) + " uploads"
+        uploads = UploadSerializer(uploads, many=True)
+        data['uploads'] = uploads.data
+    else:
+        data['error'] = True
+        data['msg'] = 'You are yet to make any uploads!'
+    print(data)
+    return Response(data)

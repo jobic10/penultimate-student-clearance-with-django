@@ -32,3 +32,11 @@ class UploadDocumentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Upload
         fields = ['file']
+
+
+class UploadSerializer(serializers.ModelSerializer):
+    document = serializers.CharField(source='document.name')
+
+    class Meta:
+        model = Upload
+        fields = ['file', 'remark', 'document', 'approved']
