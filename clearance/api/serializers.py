@@ -19,3 +19,16 @@ class ChangePasswordSerializer(serializers.Serializer):
     """
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+
+
+class DocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Document
+        fields = ['id', 'name', 'category']
+
+
+class UploadDocumentSerializer(serializers.HyperlinkedModelSerializer):
+    # # department = serializers.CharField(source='department.name')
+    class Meta:
+        model = Upload
+        fields = ['file']

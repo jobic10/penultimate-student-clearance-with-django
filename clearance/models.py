@@ -103,12 +103,15 @@ class Document(models.Model):
 
 class Upload(models.Model):
     document = models.ForeignKey(
-        Document, on_delete=models.SET_NULL, null=True)
+        Document, on_delete=models.CASCADE)
     file = models.FileField(upload_to="documents",  validators=[
                             validate_file_extension])
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
     remark = models.TextField(null=True, blank=True)
+
+    class Meta:
+        unique_together = (('document', 'student'),)
 
     def __str__(self):
         return str(self.student) + " uploaded " + str(self.document)
