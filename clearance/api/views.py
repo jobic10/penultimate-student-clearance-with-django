@@ -12,10 +12,10 @@ def student_detail(request, id):
     try:
         student = Student.objects.get(id=id)
     except:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': True, 'msg': 'Invalid Data'}, status=status.HTTP_404_NOT_FOUND)
     user = request.user
     if user.student != student:
-        return Response({'response': "You do not have access to this resource", 'error': True})
+        return Response({'response': "You do not have access to this resource", 'error': True}, status=status.HTTP_400_BAD_REQUEST)
     serializer = StudentSerializer(student)
     return Response(serializer.data)
 
@@ -72,10 +72,23 @@ def upload_docs(request):
         data["error"] = True
         data['msg'] = "You do not have access to this resource"
         return Response(data, status=status.HTTP_400_BAD_REQUEST)
-
+    # ! Check if the incoming upload is an existing upload that needs to be modified
+    # ! If exists, check status and if status is approved, do not save the form
+    doc = Document.objects.get(id=doc)
     student = Upload(student=user.student,
-                     document=Document.objects.get(id=doc))
-    serializer = UploadDocumentSerializer(student, data=request.data)
+                     document=doc)
+    previous_document = Upload.objects.filter(
+        student=user.student, document=doc)
+    if previous_document.exists():
+        # ! Check status, if approved
+        if previous_document[0].approved:
+            data["error"] = True
+            data["msg"] = "This document has already been approved. You are not allowed to re-upload!"
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        serializer = UploadDocumentSerializer(
+            previous_document[0], data=request.data)
+    else:
+        serializer = UploadDocumentSerializer(student, data=request.data)
     if serializer.is_valid():
         try:
             serializer.save()
