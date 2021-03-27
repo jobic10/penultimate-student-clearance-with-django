@@ -8,15 +8,9 @@ from .serializers import *
 
 @api_view(['GET', ])
 @permission_classes((IsAuthenticated,))
-def student_detail(request, id):
-    try:
-        student = Student.objects.get(id=id)
-    except:
-        return Response({'error': True, 'msg': 'Invalid Data'}, status=status.HTTP_404_NOT_FOUND)
+def student_detail(request):
     user = request.user
-    if user.student != student:
-        return Response({'response': "You do not have access to this resource", 'error': True}, status=status.HTTP_400_BAD_REQUEST)
-    serializer = StudentSerializer(student)
+    serializer = StudentSerializer(user.student)
     return Response(serializer.data)
 
 
@@ -97,6 +91,11 @@ def upload_docs(request):
             data["error"] = True
             data["msg"] = "You have already uploaded this document "
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        data['error'] = True
+        data['msg'] = serializer.errors
+        print(serializer.errors)
+
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -146,7 +145,7 @@ def get_upload_status(request, upload_id):
 def my_uploads(request):
     user = request.user
     data = {}
-    uploads = Upload.objects.filter(student=user.student)
+    uploads = Upload.objects.filter(student=user.student).order_by('-approved')
     if uploads.exists():
         data['error'] = False
         data['msg'] = "There are " + str(len(uploads)) + " uploads"
