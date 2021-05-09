@@ -14,13 +14,13 @@ And if you like this project, then ADD a STAR ⭐️  to this project 👆
 2. Manage Officers (Add, Update )
 3. Manage Students (Add, Update)
 4. Manage Departments (Add, Update)
-5. Edit Profile
+5. Edit Their Profile
 
 ### B. Clearance Officers Can
 1. View Department Statistics
 2. View Uploaded Documents
 3. Clear/Unclear Students
-4. Edit Profile
+4. Edit Their Profile
 
 ### C. Students Can
 1. See Clearance Status
