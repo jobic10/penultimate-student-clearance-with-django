@@ -20,7 +20,7 @@ def login_page(request):
 
 def doLogin(request, **kwargs):
     if request.method != 'POST':
-        return HttpResponse("<h4>Denied</h4>")
+        return HttpResponse("<h4>Access Denied</h4>")
     else:
         # Authenticate
         user = EmailBackend.authenticate(request, username=request.POST.get(
