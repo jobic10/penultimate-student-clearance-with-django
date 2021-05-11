@@ -46,27 +46,3 @@ def logout_user(request):
 
 def print_report(request, student_id):
     pass
-    # user = request.user
-    # student = get_object_or_404(Student, id=student_id)
-    # logbooks = Logbook.objects.filter(student=student)
-    # try:
-    #     if user.user_type == '1':  # Admin
-    #         pass
-    #     elif user.user_type == '2':  # Officer
-    #         if user.company != student.company:
-    #             messages.error(request, "Sorry, access to this is denied")
-    #             return redirect(reverse('company_home'))
-    #     elif user.user_type == '3':  # Student
-    #         if user.student != student:
-    #             messages.error(request, "You do not have access to this!")
-    #             return redirect(reverse('student_home'))
-    #     else:
-    #         messages.error(request, "You are unknown")
-    #         return redirect(reverse('student_home'))
-    # except:
-    #     messages.error(request, "Something about you is not right!")
-    #     return redirect(reverse('student_home'))
-
-    # context = {'logbooks': logbooks,
-    #            'page_title': "Logbook", 'student': student}
-    # return render(request, "portal/logbook_report.html", context)
