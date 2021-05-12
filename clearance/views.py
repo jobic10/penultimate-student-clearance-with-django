@@ -4,8 +4,6 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from .models import *
 
-# Create your views here.
-
 
 def login_page(request):
     if request.user.is_authenticated:
