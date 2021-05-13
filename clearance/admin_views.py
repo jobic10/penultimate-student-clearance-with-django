@@ -5,10 +5,8 @@ from .forms import *
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.core.mail import send_mail
-# import requests as r
 from django.template.loader import render_to_string
 from django.conf import settings
-# Create your views here.
 
 
 def admin_home(request):
