@@ -69,8 +69,6 @@ def admin_view_profile(request):
             if form.is_valid():
                 form.save()
                 update_session_auth_hash(request, request.user)
-
-                # adminForm.save()
                 messages.success(request, "Profile Updated!")
                 return redirect(reverse('admin_view_profile'))
             else:
@@ -125,8 +123,6 @@ def admin_view_profile(request):
             if form.is_valid():
                 form.save()
                 update_session_auth_hash(request, request.user)
-
-                # adminForm.save()
                 messages.success(request, "Profile Updated!")
                 return redirect(reverse('admin_view_profile'))
             else:
