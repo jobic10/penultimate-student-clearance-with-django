@@ -72,7 +72,6 @@ def view_pending_upload_by_id(request, id):
 
 def view_students(request):
     me = get_object_or_404(Officer, admin=request.user)
-    # students = Student.objects.filter(officer=me.officer)
     students = Student.objects.filter(
         department=me.department)
     context = {
@@ -84,7 +83,6 @@ def view_students(request):
 
 def pending_students(request):
     me = get_object_or_404(Officer, admin=request.user)
-    # students = Student.objects.filter(officer=me.officer)
     students = Student.objects.filter(
         department=me.department, cleared=False)
     context = {
