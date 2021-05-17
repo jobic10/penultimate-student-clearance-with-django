@@ -5,7 +5,6 @@ from .forms import *
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.conf import settings
-# Create your views here.
 
 
 def student_home(request):
