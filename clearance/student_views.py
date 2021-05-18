@@ -90,5 +90,5 @@ def edit_document(request, id):
             form.save()
             messages.success(request, "Document Updated")
         else:
-            messages.error(request, "Document Could Not Be Uploaded")
+            messages.error(request, "Document Could Not Be Updated")
     return render(request, 'admin_template/add_department_template.html', context)
