@@ -37,6 +37,7 @@ def reset_password(request):
 @api_view(['DELETE', ])
 def delete_upload(request, id):
     pass
+    # Not Used
 
 
 @api_view(['POST', 'GET'])
