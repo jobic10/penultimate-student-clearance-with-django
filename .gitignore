@@ -15,7 +15,7 @@ __pycache__
 
 db.sqlite3
 clearance/migrations/
-static/
+# static/
 # clearance/templates
 media/
 clearance/models.py
