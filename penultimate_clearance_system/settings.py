@@ -148,7 +148,6 @@ AUTH_USER_MODEL = 'clearance.CustomUser'
 SMS_TOKEN = os.environ.get('SMS_TOKEN')
 
 SMS_SENDER = 'UNILORIN'
-SMS_BASE_URL = 'https://smartsmssolutions.com/api/json.php?'
 DEVELOPER = "Owonubi Job Sunday"
 SUPERVISOR = "Mr. H. A. Mojeed"
 APP_NAME = "Penultimate Student Clearance System"
