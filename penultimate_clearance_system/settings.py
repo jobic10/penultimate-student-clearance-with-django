@@ -145,8 +145,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'clearance.CustomUser'
 
 
-SMS_TOKEN = os.environ.get('SMS_TOKEN')
-
 DEVELOPER = "Owonubi Job Sunday"
 SUPERVISOR = "Mr. H. A. Mojeed"
 APP_NAME = "Penultimate Student Clearance System"
